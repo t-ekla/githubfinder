@@ -1,17 +1,22 @@
 import React, { Fragment, Component } from 'react';
 import Spinner from '../layout/Spinner';
+import Repos from '../repos/Repos';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export class User extends Component {
     componentDidMount() {
         this.props.getUser(this.props.match.params.login);
+        this.props.getUserRepos(this.props.match.params.login);
+
     }
 
     static propTypes = {
         loading: PropTypes.bool,
         user: PropTypes.object.isRequired,
-        getUser: PropTypes.func.isRequired, 
+        repos: PropTypes.array.isRequired,
+        getUser: PropTypes.func.isRequired,
+        getUserRepos: PropTypes.func.isRequired 
     }
 
     render() {
@@ -32,7 +37,7 @@ export class User extends Component {
             hireable
         } = this.props.user;
 
-        const { loading } = this.props;
+        const { loading, repos } = this.props;
         if (loading ) return <Spinner />;
 
         return <Fragment>
@@ -60,7 +65,7 @@ export class User extends Component {
                     {bio && (
                         <Fragment>
                             <h3>Bio</h3>
-                            <p>Bio</p>
+                            <p>{bio}</p>
                         </Fragment>
                         )}
                         <a href={html_url} className="btn btn-dark my-1"> Visit Github Profile
@@ -95,7 +100,7 @@ export class User extends Component {
             </div>
 
 
-
+            <Repos repos={repos} />                        
             </Fragment>;
     }
 }
