@@ -35,7 +35,22 @@ const GithubState = props => {
         })
       };
 
-    // Get User 
+    // Get User
+    const getUser = async username => {
+        setLoading();
+    
+        const response = await axios.get(
+          `https://api.github.com/users/${username}?&client_id=${
+          process.env.REACT_APP_GITHUB_CLIENT_ID
+        }&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+        );
+
+
+        dispatch({
+            type: GET_USER,
+            payload: response.data
+        })
+      } 
 
     // Get Repos
 
@@ -52,7 +67,8 @@ const GithubState = props => {
         repos: state.repos, 
         loading: state.loading,
         searchUsers,
-        clearUsers
+        clearUsers,
+        getUser
     }}
     >
     { props.children }
