@@ -13,7 +13,6 @@ import GithubState from './context/github/githubState';
 
 
 const App = () => {
-  const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -48,11 +47,7 @@ const App = () => {
     setLoading(false);
   }
 
-  // Clear users from state
-  const clearUsers = () => {
-    setUsers([]);
-    setLoading(false);
-  };
+
   
   // Set Alert 
   const showAlert = (msg, type) => {
@@ -77,11 +72,9 @@ const App = () => {
             render={props => (
             <Fragment>
               <Search 
-                clearUsers={clearUsers} 
-                showClear={ users.length > 0 ? true : false }
                 setAlert={showAlert}
               />
-              <Users loading={loading} users={users} />
+              <Users />
             </Fragment>
           )} />
           <Route exact path='/about' component={About} />
