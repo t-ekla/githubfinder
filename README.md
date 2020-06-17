@@ -1,3 +1,5 @@
 # Github Profile Finder
 
-This project is built in React, following the React Front to Back Udemy course. 
+This is a Github Profile Finder built in React. 
+
+![screengrab](https://media.giphy.com/media/WmzhJUn9hRjNyCbtjs/giphy.gif)
